@@ -22,11 +22,13 @@ function App() {
   const search = (evt) => {
     if (evt.key === 'Enter') {
       setIsLoading(true);
-      fetch(`${api.baseurl}weather?q=${city}&units=imperial&appid=${api.key}`)
+      console.log('searched city', city);
+      fetch(`${api.baseurl}weather?q=${city}&appid=${api.key}`)
         .then((response) => {
           return response.json();
         })
         .then((result) => {
+          console.log('result', result);
           setWeather(result);
           setCity('');
           setIsLoading(false);

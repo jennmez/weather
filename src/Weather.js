@@ -21,10 +21,9 @@ const Weather = (props) => {
           <div className="location">
             {weather.name}, {sys.country}
           </div>
-          <div className="weather-container">
-            <WeatherIcon currentWeather={weather}></WeatherIcon>
-            <Temperature main={main}></Temperature>
-          </div>
+          <div className="weather-container"></div>
+          <WeatherIcon currentWeather={weather}></WeatherIcon>
+          <Temperature main={main}></Temperature>
           <div className="temp-description">
             {weather.weather[0].description}
           </div>
