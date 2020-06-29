@@ -2,10 +2,11 @@ import React from 'react';
 import './styles/index.css';
 import Temperature from './Temperature';
 import WeatherIcon from './WeatherIcon';
+import MoreInfo from './MoreInfo';
 
 const Weather = (props) => {
   const { weather } = props;
-  const { main, sys, dt } = weather;
+  const { main, sys, dt, wind } = weather;
 
   const timeConverter = (dt) => {
     const dayTimeAccessed = new Date(dt * 1000);
@@ -55,10 +56,15 @@ const Weather = (props) => {
           <div className="location">
             {weather.name}, {sys.country}
           </div>
-          <div className="weather-container">
-            <WeatherIcon currentWeather={weather}></WeatherIcon>
-            <Temperature main={main} weather={weather}></Temperature>
+          <div className="weather-type">
+            Today's forecast is: {weather.weather[0].main}
           </div>
+          <Temperature
+            main={main}
+            currentWeather={weather}
+            sys={sys}
+            wind={wind}
+          ></Temperature>
         </>
       ) : (
         <>

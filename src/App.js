@@ -3,12 +3,6 @@ import './styles/index.css';
 import Weather from './Weather';
 
 function App() {
-  // let today = new Date();
-  // let date =
-  //   today.getMonth() + 1 + '-' + today.getDate() + '-' + today.getFullYear();
-  // let time = today.getHours() + ':' + today.getMinutes();
-  // let dateTime = date + ' ' + time;
-
   const api = {
     key: '4884f8b1995ccaa945f940a3dd644669',
     baseurl: 'https://api.openweathermap.org/data/2.5/',
