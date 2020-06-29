@@ -6,9 +6,9 @@
 body {
   font-family: Quicksand, sans-serif;
   font-weight: 300;
-  background-image: url(http://genchi.info/img/sky-blue-wallpaper-5.jpg);
+  background: url(http://genchi.info/img/sky-blue-wallpaper-5.jpg) no-repeat
+    center fixed;
   background-size: cover;
-  background-position: top center;
   font-size: 1.5em;
   color: #003eff;
 }
@@ -62,9 +62,7 @@ main {
   font-size: 5em;
   font-weight: 400;
   margin: 10px;
-  /* background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
-  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.1); */
+  padding: 10px;
 }
 
 button {
@@ -92,8 +90,25 @@ button {
 
 img {
   padding: 20px;
+  max-width: 100%;
 }
 
 .temp-container {
   display: flex;
+  /* flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px; */
+}
+
+@media (max-width: 640px) {
+  .title {
+    padding: 15px 0;
+    font-size: 1.75em;
+  }
+  .weather-container {
+    flex-wrap: wrap;
+  }
+  .location {
+    font-size: 1em;
+  }
 }

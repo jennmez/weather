@@ -5,7 +5,6 @@ const Temperature = (props) => {
   const { temp } = props.main;
 
   const [tempType, setTemp] = useState('F');
-  // const [changeTemp, setNewTemp] = useState(temp);
 
   const convertCel = (currentTemp) => {
     let converted = currentTemp - 273.15;
@@ -18,12 +17,6 @@ const Temperature = (props) => {
   };
 
   const toggle = () => {
-    //if the previous state is F, change to Celsius
-    // if (tempType === 'F') {
-    //   setNewTemp(convertCel(tempToConvert));
-    // } else {
-    //   setNewTemp(convertFah(tempToConvert));
-    // }
     setTemp((prevState) => (prevState === 'F' ? 'C' : 'F'));
   };
   return (
@@ -33,10 +26,7 @@ const Temperature = (props) => {
         <span>°{tempType}</span>
       </div>
       <button className="toggle" onClick={toggle}>
-        change to °F
-      </button>
-      <button className="toggle" onClick={toggle}>
-        change to °C
+        change to °{tempType === 'F' ? 'C' : 'F'}
       </button>
     </div>
   );
