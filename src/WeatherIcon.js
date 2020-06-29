@@ -3,7 +3,6 @@ import './styles/index.css';
 import rain from './SVG/rain.svg';
 import clouds from './SVG/clouds.svg';
 import lightShowers from './SVG/lightShowers.svg';
-import night from './SVG/night.svg';
 import snow from './SVG/snow.svg';
 import sun from './SVG/sun.svg';
 import thunder from './SVG/thunder.svg';
