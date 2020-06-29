@@ -76,7 +76,6 @@ const Temperature = (props) => {
               </p>
               <p>Humidity: {humidity}%</p>
               <p>Wind Speed: {speed} </p>
-
               <p>Sunrise: {timeConverter(sunrise)}</p>
               <p>Sunset: {timeConverter(sunset)}</p>
             </div>

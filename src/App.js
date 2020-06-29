@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './styles/index.css';
 import Weather from './Weather';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const api = {
@@ -27,7 +29,7 @@ function App() {
           setCity('');
           setIsLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log('you hit an error', err));
     }
   };
 
@@ -45,11 +47,18 @@ function App() {
         ></input>
       </div>
       {isLoading ? (
-        <div>
+        <div className="loading">
+          <FontAwesomeIcon icon={faSpinner} size="lg" color="#ff9800" pulse />
           <p>Please wait while we find that forecast.</p>
         </div>
       ) : null}
-      <Weather weather={weather}></Weather>
+      {weather.cod === '404' ? (
+        <div className="error">
+          <h3>Oh no! That city was not found. Please try another location!</h3>
+        </div>
+      ) : (
+        <Weather weather={weather}></Weather>
+      )}
     </div>
   );
 }
