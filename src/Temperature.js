@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import WeatherIcon from './WeatherIcon';
 import './styles/index.css';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const Temperature = (props) => {
   const { temp, temp_max, temp_min, humidity } = props.main;
@@ -55,8 +55,13 @@ const Temperature = (props) => {
           </button>
         </div>
         <div className="more-temp">
-          <h2>View More Info</h2>
-          {/* <FontAwesomeIcon icon={faCoffee} size="lg" onClick={display} /> */}
+          <h2>view more weather info</h2>
+          <FontAwesomeIcon
+            icon={faCaretDown}
+            color="#ff9800"
+            size="lg"
+            onClick={display}
+          />
           {showInfo === false ? null : (
             <div className="highs-lows">
               <p>
