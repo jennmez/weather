@@ -6,7 +6,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const api = {
-    key: '4884f8b1995ccaa945f940a3dd644669',
+    key: process.env.REACT_APP_WEATHER_API_KEY,
     baseurl: 'https://api.openweathermap.org/data/2.5/',
   };
   //taking a city from our search, initial state is empty string
