@@ -33,7 +33,11 @@ const WeatherIcon = (props) => {
 
   return (
     <>
-      <img src={getWeatherIcon(conditions)} alt="current weather icon"></img>
+      <img
+        src={getWeatherIcon(conditions)}
+        alt="current weather icon"
+        className="weather-icon"
+      ></img>
     </>
   );
 };

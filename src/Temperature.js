@@ -3,6 +3,9 @@ import WeatherIcon from './WeatherIcon';
 import './styles/index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import Sunrise from './Sunrise';
+import sunriseIcon from './SVG/sunrise.svg';
+import sunsetIcon from './SVG/sunset.svg';
 
 const Temperature = (props) => {
   const { temp, temp_max, temp_min, humidity } = props.main;
@@ -57,6 +60,7 @@ const Temperature = (props) => {
         <div className="more-temp">
           <h2>view more weather info</h2>
           <FontAwesomeIcon
+            className="icon"
             icon={faCaretDown}
             color="#ff9800"
             size="lg"
@@ -75,9 +79,18 @@ const Temperature = (props) => {
                 <span>°{tempType}</span>
               </p>
               <p>Humidity: {humidity}%</p>
-              <p>Wind Speed: {speed} </p>
-              <p>Sunrise: {timeConverter(sunrise)}</p>
-              <p>Sunset: {timeConverter(sunset)}</p>
+              <p>Wind Speed: {speed} mph</p>
+              <p>
+                <span>
+                  <img className="icon" src={sunriseIcon} alt="sunrise icon" />:{' '}
+                  {timeConverter(sunrise)}
+                </span>
+              </p>
+              <p>
+                <img className="icon" src={sunsetIcon} alt="sunset icon" />
+                <span>: {timeConverter(sunset)}</span>
+              </p>
+              {/* <Sunrise /> */}
             </div>
           )}
         </div>
