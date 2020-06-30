@@ -80,7 +80,11 @@ const Temperature = (props) => {
           </button>
         </div>
         <div className="more-temp">
-          <h2>view more weather info</h2>
+          {showInfo === false ? (
+            <h2>Show me more details</h2>
+          ) : (
+            <h2>Hide these details</h2>
+          )}
           <div>
             <FontAwesomeIcon
               className="icon"
