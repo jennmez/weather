@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import WeatherIcon from './WeatherIcon';
 import './styles/index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import Sunrise from './Sunrise';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import sunriseIcon from './SVG/sunrise.svg';
 import sunsetIcon from './SVG/sunset.svg';
+import gsap from 'gsap';
 
 const Temperature = (props) => {
   const { temp, temp_max, temp_min, humidity } = props.main;
@@ -42,6 +42,28 @@ const Temperature = (props) => {
     setInfo((prevState) => (prevState === false ? true : false));
   };
 
+  let divRef = useRef(0);
+  const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
+
+  //not working, need to research more
+  useEffect(() => {
+    timeline.from(divRef.current.childNodes, {
+      y: 100,
+      opacity: 0,
+      ease: 'power1.out',
+      duration: 0.7,
+      stagger: 0.1,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (showInfo) {
+      timeline.play();
+    } else {
+      timeline.reverse();
+    }
+  }, [showInfo]);
+
   return (
     <>
       <div className="weather-container">
@@ -59,15 +81,17 @@ const Temperature = (props) => {
         </div>
         <div className="more-temp">
           <h2>view more weather info</h2>
-          <FontAwesomeIcon
-            className="icon"
-            icon={faCaretDown}
-            color="#ff9800"
-            size="lg"
-            onClick={display}
-          />
+          <div>
+            <FontAwesomeIcon
+              className="icon"
+              icon={showInfo === false ? faCaretDown : faCaretUp}
+              color="#ff9800"
+              size="lg"
+              onClick={display}
+            />
+          </div>
           {showInfo === false ? null : (
-            <div className="highs-lows">
+            <div className="highs-lows" ref={(element) => (divRef = element)}>
               <p>
                 High:{' '}
                 {tempType === 'F' ? convertFah(temp_max) : convertCel(temp_max)}
@@ -80,17 +104,12 @@ const Temperature = (props) => {
               </p>
               <p>Humidity: {humidity}%</p>
               <p>Wind Speed: {speed} mph</p>
-              <p>
-                <span>
-                  <img className="icon" src={sunriseIcon} alt="sunrise icon" />:{' '}
-                  {timeConverter(sunrise)}
-                </span>
-              </p>
-              <p>
+              <div className="sunrise-container">
+                <img className="icon" src={sunriseIcon} alt="sunrise icon" />
+                <div className="sunrise-content">{timeConverter(sunrise)}</div>
                 <img className="icon" src={sunsetIcon} alt="sunset icon" />
-                <span>: {timeConverter(sunset)}</span>
-              </p>
-              {/* <Sunrise /> */}
+                <div className="sunrise-content">{timeConverter(sunset)}</div>
+              </div>
             </div>
           )}
         </div>

@@ -1,8 +1,6 @@
 import React from 'react';
 import './styles/index.css';
 import Temperature from './Temperature';
-import WeatherIcon from './WeatherIcon';
-import MoreInfo from './MoreInfo';
 
 const Weather = (props) => {
   const { weather } = props;
@@ -10,11 +8,6 @@ const Weather = (props) => {
 
   const timeConverter = (dt) => {
     const dayTimeAccessed = new Date(dt * 1000);
-
-    // const timeInZone = dayTimeAccessed.toLocaleTimeString(undefined, {
-    //   hour: '2-digit',
-    //   minute: '2-digit',
-    // });
 
     const days = [
       'Sunday',
