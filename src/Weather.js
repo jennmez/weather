@@ -5,16 +5,13 @@ import DailyForecast from './DailyForecast';
 import { timeConverter } from './utilities';
 
 const Weather = (props) => {
-  const { current, daily, hourly } = props.searchedWeather;
+  const { current, daily } = props.searchedWeather;
 
   return (
     <div className="main">
       {typeof current !== 'undefined' ? (
         <>
           <div className="date-time">{timeConverter(current.dt)}</div>
-          {/* <div className="location">
-            {weather.name}, {sys.country}
-          </div> */}
           <div className="weather-type">
             Today's forecast is: {current.weather[0].main}
           </div>

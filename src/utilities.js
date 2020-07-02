@@ -32,3 +32,13 @@ export const timeConverter = (dt) => {
   const time = `${day}, ${month} ${date}, ${year}`;
   return time;
 };
+
+export const convertCel = (currentTemp) => {
+  let converted = currentTemp - 273.15;
+  return Math.round(converted);
+};
+
+export const convertFah = (currentTemp) => {
+  let converted = currentTemp * 1.8 - 459.67;
+  return Math.round(converted);
+};

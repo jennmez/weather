@@ -53,7 +53,7 @@ function App() {
         <div className="title">
           Weather
           <span className="header-icon">
-            <img src={sun} alt="sun icon" />
+            <img className="header-icon" src={sun} alt="sun icon" />
           </span>
           d
         </div>

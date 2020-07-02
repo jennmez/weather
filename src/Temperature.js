@@ -6,6 +6,7 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import sunriseIcon from './SVG/sunrise.svg';
 import sunsetIcon from './SVG/sunset.svg';
 import gsap from 'gsap';
+import { convertCel, convertFah } from './utilities';
 
 const Temperature = (props) => {
   const {
@@ -19,16 +20,6 @@ const Temperature = (props) => {
 
   const [tempType, setTemp] = useState('F');
   const [showInfo, setInfo] = useState(false);
-
-  const convertCel = (currentTemp) => {
-    let converted = currentTemp - 273.15;
-    return Math.round(converted);
-  };
-
-  const convertFah = (currentTemp) => {
-    let converted = currentTemp * 1.8 - 459.67;
-    return Math.round(converted);
-  };
 
   const toggle = () => {
     setTemp((prevState) => (prevState === 'F' ? 'C' : 'F'));
@@ -73,7 +64,10 @@ const Temperature = (props) => {
     <>
       <div className="weather-container">
         <div className="weather-pic">
-          <WeatherIcon currentWeather={props.current}></WeatherIcon>
+          <WeatherIcon
+            className="weather-icon"
+            currentWeather={props.current}
+          ></WeatherIcon>
         </div>
         <div className="temp-container">
           <div className="temp">
