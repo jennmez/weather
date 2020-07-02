@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/index.css';
 import Weather from './Weather';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import sun from './SVG/sun.svg';
+import Search from './Search';
 
 function App() {
   const api = {
@@ -15,34 +17,56 @@ function App() {
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  const [coords, setCoords] = useState({});
+
+  const updateCoords = (coords) => {
+    setCoords(coords);
+  };
+
   const search = (evt) => {
-    if (evt.key === 'Enter') {
+    if (coords.lon) {
       setIsLoading(true);
-      fetch(`${api.baseurl}weather?q=${city}&appid=${api.key}`)
+      fetch(
+        `${api.baseurl}onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${api.key}`
+      )
         .then((response) => {
           return response.json();
         })
         .then((result) => {
           setWeather(result);
-          setCity('');
+          // setCity('');
           setIsLoading(false);
+          console.log(result);
         })
         .catch((err) => console.log('you hit an error', err));
     }
   };
 
+  useEffect(() => {
+    if (coords !== '') {
+      search(coords);
+    }
+  }, [coords]);
+
   return (
     <div className="container">
       <div className="header">
-        <div className="title">Weather Outlook</div>
-        <input
+        <div className="title">
+          Weather
+          <span className="header-icon">
+            <img src={sun} alt="sun icon" />
+          </span>
+          d
+        </div>
+        <Search updateCoords={updateCoords} />
+        {/* <input
           type="text"
           className="search"
           placeholder="What's the weather in..."
           onChange={(event) => setCity(event.target.value)}
           value={city}
           onKeyPress={search}
-        ></input>
+        ></input> */}
       </div>
       {isLoading ? (
         <div className="loading">
