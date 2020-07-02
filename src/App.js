@@ -36,7 +36,6 @@ function App() {
           setWeather(result);
           // setCity('');
           setIsLoading(false);
-          console.log(result);
         })
         .catch((err) => console.log('you hit an error', err));
     }
@@ -79,7 +78,7 @@ function App() {
           <h3>Oh no! That city was not found. Please try another location!</h3>
         </div>
       ) : (
-        <Weather weather={weather}></Weather>
+        <Weather searchedWeather={weather}></Weather>
       )}
     </div>
   );

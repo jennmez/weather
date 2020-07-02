@@ -8,9 +8,14 @@ import sunsetIcon from './SVG/sunset.svg';
 import gsap from 'gsap';
 
 const Temperature = (props) => {
-  const { temp, temp_max, temp_min, humidity } = props.main;
-  const { sunrise, sunset } = props.sys;
-  const { speed } = props.wind;
+  const {
+    sunrise,
+    sunset,
+    temp,
+    feels_like,
+    humidity,
+    wind_speed,
+  } = props.current;
 
   const [tempType, setTemp] = useState('F');
   const [showInfo, setInfo] = useState(false);
@@ -68,7 +73,7 @@ const Temperature = (props) => {
     <>
       <div className="weather-container">
         <div className="weather-pic">
-          <WeatherIcon currentWeather={props.currentWeather}></WeatherIcon>
+          <WeatherIcon currentWeather={props.current}></WeatherIcon>
         </div>
         <div className="temp-container">
           <div className="temp">
@@ -97,17 +102,14 @@ const Temperature = (props) => {
           {showInfo === false ? null : (
             <div className="highs-lows" ref={(element) => (divRef = element)}>
               <p>
-                High:{' '}
-                {tempType === 'F' ? convertFah(temp_max) : convertCel(temp_max)}
-                <span>°{tempType}</span>
-              </p>
-              <p>
-                Low:{' '}
-                {tempType === 'F' ? convertFah(temp_min) : convertCel(temp_min)}
+                Feels Like:{' '}
+                {tempType === 'F'
+                  ? convertFah(feels_like)
+                  : convertCel(feels_like) === 'C'}
                 <span>°{tempType}</span>
               </p>
               <p>Humidity: {humidity}%</p>
-              <p>Wind Speed: {speed} mph</p>
+              <p>Wind Speed: {wind_speed} metre/sec</p>
               <div className="sunrise-container">
                 <img className="icon" src={sunriseIcon} alt="sunrise icon" />
                 <div className="sunrise-content">{timeConverter(sunrise)}</div>
