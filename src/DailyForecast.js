@@ -19,19 +19,19 @@ const DailyForecast = (props) => {
         {props.daily
           .map((day, i) => (
             <div key={i} className="day">
-              <div className="date">{timeConverter(day.dt)}</div>
+              <h4 className="date">{timeConverter(day.dt)}</h4>
               <div className="daily-icon">
                 <WeatherIcon currentWeather={day}></WeatherIcon>
-                <div>
-                  Daytime Temperature:
-                  {tempType === 'F'
-                    ? convertFah(day.temp.day)
-                    : convertCel(day.temp.day)}
-                  <span>°{tempType}</span>
-                </div>
-                <div>Weather Conditions: {day.weather[0].description}</div>
-                <div>Midday UV index: {day.uvi}</div>
               </div>
+              <p>
+                Daytime Temp:{' '}
+                {tempType === 'F'
+                  ? convertFah(day.temp.day)
+                  : convertCel(day.temp.day)}
+                <span>°{tempType}</span>
+              </p>
+              <p>Forecast: {day.weather[0].description}</p>
+              <p>Midday UV index: {day.uvi}</p>
             </div>
           ))
           .slice(1)}

@@ -1,15 +1,7 @@
 export const timeConverter = (dt) => {
   const dayTimeAccessed = new Date(dt * 1000);
 
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const months = [
     'Jan',

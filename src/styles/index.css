@@ -167,16 +167,23 @@ button {
 
 p {
   margin: 10px;
+  font-size: 18px;
 }
 
 .sunrise-content {
   position: relative;
-  justify-self: start;
+  justify-content: start;
   align-self: end;
   margin: 0px 5px;
 }
 
 .daily-icon {
+  height: 100%;
+}
+
+.daily-icon img {
+  display: block;
+  margin: 10px auto;
   max-width: 75px;
   max-height: 75px;
 }
@@ -185,12 +192,23 @@ p {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-items: center;
+  justify-content: center;
   margin: 10px 0px 0px 0px;
 }
 
 .day {
   margin: 10px;
+  width: 285px;
+  height: 245px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  /* align-items: center; */
+}
+
+h4 {
+  margin: 10px 5px 5px 5px;
 }
 
 @media (max-width: 640px) {
