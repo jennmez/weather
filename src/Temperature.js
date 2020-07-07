@@ -1,25 +1,25 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import WeatherIcon from './WeatherIcon';
 import './styles/index.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import sunriseIcon from './SVG/sunrise.svg';
-import sunsetIcon from './SVG/sunset.svg';
-import gsap from 'gsap';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+// import sunriseIcon from './SVG/sunrise.svg';
+// import sunsetIcon from './SVG/sunset.svg';
+// import gsap from 'gsap';
 import { convertCel, convertFah } from './utilities';
 
 const Temperature = (props) => {
   const {
-    sunrise,
-    sunset,
+    // sunrise,
+    // sunset,
     temp,
-    feels_like,
-    humidity,
-    wind_speed,
+    // feels_like,
+    // humidity,
+    // wind_speed,
   } = props.current;
 
   const [tempType, setTemp] = useState('F');
-  const [showInfo, setInfo] = useState(false);
+  // const [showInfo, setInfo] = useState(false);
 
   const toggle = () => {
     setTemp((prevState) => (prevState === 'F' ? 'C' : 'F'));
@@ -34,31 +34,31 @@ const Temperature = (props) => {
     return timeInZone;
   };
 
-  const display = () => {
-    setInfo((prevState) => (prevState === false ? true : false));
-  };
+  // const display = () => {
+  //   setInfo((prevState) => (prevState === false ? true : false));
+  // };
 
-  let divRef = useRef(0);
-  const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
+  // let divRef = useRef(0);
+  // const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
 
-  //not working, need to research more
-  useEffect(() => {
-    timeline.from(divRef.current.childNodes, {
-      y: 100,
-      opacity: 0,
-      ease: 'power1.out',
-      duration: 0.7,
-      stagger: 0.1,
-    });
-  }, []);
+  // //not working, need to research more
+  // useEffect(() => {
+  //   timeline.from(divRef.current.childNodes, {
+  //     y: 100,
+  //     opacity: 0,
+  //     ease: 'power1.out',
+  //     duration: 0.7,
+  //     stagger: 0.1,
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    if (showInfo) {
-      timeline.play();
-    } else {
-      timeline.reverse();
-    }
-  }, [showInfo]);
+  // useEffect(() => {
+  //   if (showInfo) {
+  //     timeline.play();
+  //   } else {
+  //     timeline.reverse();
+  //   }
+  // }, [showInfo]);
 
   return (
     <>
@@ -77,41 +77,6 @@ const Temperature = (props) => {
           <button className="toggle" onClick={toggle}>
             change to °{tempType === 'F' ? 'C' : 'F'}
           </button>
-        </div>
-        <div className="more-temp">
-          {showInfo === false ? (
-            <h2>Show me more details</h2>
-          ) : (
-            <h2>Hide these details</h2>
-          )}
-          <div>
-            <FontAwesomeIcon
-              className="icon"
-              icon={showInfo === false ? faCaretDown : faCaretUp}
-              color="#ff9800"
-              size="lg"
-              onClick={display}
-            />
-          </div>
-          {showInfo === false ? null : (
-            <div className="highs-lows" ref={(element) => (divRef = element)}>
-              <p>
-                Feels Like:{' '}
-                {tempType === 'F'
-                  ? convertFah(feels_like)
-                  : convertCel(feels_like) === 'C'}
-                <span>°{tempType}</span>
-              </p>
-              <p>Humidity: {humidity}%</p>
-              <p>Wind Speed: {wind_speed} metre/sec</p>
-              <div className="sunrise-container">
-                <img className="icon" src={sunriseIcon} alt="sunrise icon" />
-                <div className="sunrise-content">{timeConverter(sunrise)}</div>
-                <img className="icon" src={sunsetIcon} alt="sunset icon" />
-                <div className="sunrise-content">{timeConverter(sunset)}</div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>

@@ -53,8 +53,9 @@ h1 {
 }
 
 input {
+  font-family: Quicksand, sans-serif;
   border-radius: 16px 16px 0px 0px;
-  width: 100%;
+  width: 500px;
   padding: 10px;
   border: none;
   outline: none;
@@ -93,7 +94,7 @@ main {
 }
 
 .temp {
-  color: #0096ff;
+  color: rgb(0, 150, 255);
   text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.8);
   font-size: 5em;
   font-weight: 400;
@@ -165,7 +166,8 @@ button {
 }
 
 p {
-  margin: 10px;
+  margin: 5px;
+  padding: 5px;
   font-size: 18px;
 }
 
@@ -198,12 +200,15 @@ p {
 .day {
   margin: 10px;
   width: 285px;
-  height: 245px;
+  height: 260px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-content: center;
-  /* align-items: center; */
+  border: 1px solid rgb(0, 150, 255);
+  border-radius: 10px;
+  /* background-color: rgb(255, 152, 0, 0.1); */
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 h4 {

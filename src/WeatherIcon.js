@@ -33,26 +33,26 @@ const WeatherIcon = (props) => {
     }
   };
 
-  // let imgRef = useRef(null);
-  // useEffect(() => {
-  //   gsap.from(imgRef, {
-  //     scaleX: 1.2,
-  //     scaleY: 1.2,
-  //     duration: 1,
-  //     repeat: -1,
-  //     yoyo: true,
-  //     ease: 'power1.out',
-  //   });
-  // }, []);
+  let imgRef = useRef(null);
+  useEffect(() => {
+    gsap.from(imgRef, {
+      scaleX: 1.2,
+      scaleY: 1.2,
+      duration: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.out',
+    });
+  }, []);
 
   return (
     <>
       <img
         src={getWeatherIcon(conditions)}
         alt="current weather icon"
-        // ref={(element) => {
-        //   imgRef = element;
-        // }}
+        ref={(element) => {
+          imgRef = element;
+        }}
       ></img>
     </>
   );

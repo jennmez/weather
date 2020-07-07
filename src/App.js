@@ -11,8 +11,7 @@ function App() {
     key: process.env.REACT_APP_WEATHER_API_KEY,
     baseurl: 'https://api.openweathermap.org/data/2.5/',
   };
-  //taking a city from our search, initial state is empty string
-  const [city, setCity] = useState('');
+
   //takes weather from city, initially an empty object b/c we don't have data from the API yet
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +33,6 @@ function App() {
         })
         .then((result) => {
           setWeather(result);
-          // setCity('');
           setIsLoading(false);
         })
         .catch((err) => console.log('you hit an error', err));
