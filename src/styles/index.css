@@ -166,7 +166,6 @@ button {
 }
 
 p {
-  margin: 5px;
   padding: 5px;
   font-size: 18px;
 }
@@ -180,6 +179,9 @@ p {
 
 .daily-icon {
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .daily-icon img {

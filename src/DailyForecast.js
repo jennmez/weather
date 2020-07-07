@@ -4,25 +4,35 @@ import { timeConverter, convertCel, convertFah } from './utilities';
 import WeatherIcon from './WeatherIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import gsap from 'gsap';
 
 const DailyForecast = (props) => {
-  console.log(props);
+  const [info, showInfo] = useState(false);
 
-  const [tempType, setTemp] = useState('F');
+  let divRef = useRef(0);
+  const tl = useMemo(() => gsap.timeline({ paused: true }), []);
 
-  const toggle = () => {
-    setTemp((prevState) => (prevState === 'F' ? 'C' : 'F'));
-  };
+  useEffect(() => {
+    tl.from(divRef.current.childNodes, {
+      y: 100,
+      opacity: 0,
+      ease: 'power3.out',
+      duration: 0.7,
+      stagger: 0.1,
+    });
+  }, []);
 
-  const [showInfo, setInfo] = useState(false);
-
-  const display = () => {
-    setInfo((prevState) => (prevState === false ? true : false));
-  };
+  useEffect(() => {
+    if (info) {
+      tl.play();
+    } else {
+      tl.reverse();
+    }
+  }, [info]);
 
   return (
     <>
-      {showInfo === false ? (
+      {!info ? (
         <h3>Show me the 7-day forecast</h3>
       ) : (
         <h3>Hide the 7-day forecast</h3>
@@ -30,35 +40,39 @@ const DailyForecast = (props) => {
       <div>
         <FontAwesomeIcon
           className="icon"
-          icon={showInfo === false ? faCaretDown : faCaretUp}
+          icon={!info ? faCaretDown : faCaretUp}
           color="#ff9800"
           size="lg"
-          onClick={display}
+          onClick={() => showInfo(!info)}
         />
       </div>
-      {showInfo === false ? null : (
-        <div className="dailys">
-          {props.daily
-            .map((day, i) => (
-              <div key={i} className="day">
-                <h4 className="date">{timeConverter(day.dt)}</h4>
-                <div className="daily-icon">
-                  <WeatherIcon currentWeather={day}></WeatherIcon>
-                </div>
-                <p>
-                  Daytime Temp:{' '}
-                  {tempType === 'F'
-                    ? convertFah(day.temp.day)
-                    : convertCel(day.temp.day)}
-                  <span>°{tempType}</span>
-                </p>
-                <p>Forecast: {day.weather[0].description}</p>
-                <p>UV index: {day.uvi}</p>
+      <div ref={divRef} className="dailys">
+        {props.daily
+          .map((day, i) => (
+            <div key={i} className="day">
+              <h4 className="date">{timeConverter(day.dt)}</h4>
+              <div className="daily-icon">
+                <WeatherIcon currentWeather={day}></WeatherIcon>
               </div>
-            ))
-            .slice(1)}
-        </div>
-      )}
+              <p>
+                Day:{' '}
+                {props.tempType === 'F'
+                  ? convertFah(day.temp.day)
+                  : convertCel(day.temp.day)}
+                <span>°{props.tempType}</span>
+              </p>
+              <p>
+                Night:{' '}
+                {props.tempType === 'F'
+                  ? convertFah(day.temp.night)
+                  : convertCel(day.temp.night)}
+                <span>°{props.tempType}</span>
+              </p>
+              <p>Forecast: {day.weather[0].description}</p>
+            </div>
+          ))
+          .slice(1)}
+      </div>
     </>
   );
 };

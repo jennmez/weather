@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/index.css';
 import Temperature from './Temperature';
 import DailyForecast from './DailyForecast';
@@ -6,6 +6,12 @@ import { timeConverter } from './utilities';
 
 const Weather = (props) => {
   const { current, daily } = props.searchedWeather;
+
+  const [tempType, setTemp] = useState('F');
+
+  const toggle = () => {
+    setTemp((prevState) => (prevState === 'F' ? 'C' : 'F'));
+  };
 
   return (
     <div className="main">
@@ -15,8 +21,11 @@ const Weather = (props) => {
           <div className="weather-type">
             Today's forecast is: {current.weather[0].main}
           </div>
-          <Temperature current={current}></Temperature>
-          <DailyForecast daily={daily}></DailyForecast>
+          <button className="toggle" onClick={toggle}>
+            change to °{tempType === 'F' ? 'C' : 'F'}
+          </button>
+          <Temperature current={current} tempType={tempType}></Temperature>
+          <DailyForecast daily={daily} tempType={tempType}></DailyForecast>
         </>
       ) : (
         <>
