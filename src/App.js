@@ -50,23 +50,13 @@ function App() {
   return (
     <div className="container">
       <div className="header">
-        <div className="title">
-          Weather
-          <span className="header-icon">
-            <img className="header-icon" src={sun} alt="sun icon" />
-          </span>
-          d
+        <h1>Weather</h1>
+        <div className="header-icon">
+          <img src={sun} alt="sun icon" />
         </div>
-        <Search updateCoords={updateCoords} />
-        {/* <input
-          type="text"
-          className="search"
-          placeholder="What's the weather in..."
-          onChange={(event) => setCity(event.target.value)}
-          value={city}
-          onKeyPress={search}
-        ></input> */}
+        <h1>d</h1>
       </div>
+      <Search updateCoords={updateCoords} />
       {isLoading ? (
         <div className="loading">
           <FontAwesomeIcon icon={faSpinner} size="lg" color="#ff9800" pulse />
