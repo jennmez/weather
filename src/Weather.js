@@ -1,63 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/index.css';
 import Temperature from './Temperature';
+import DailyForecast from './DailyForecast';
+import { timeConverter } from './utilities';
 
 const Weather = (props) => {
-  const { weather } = props;
-  const { main, sys, dt, wind } = weather;
+  const { current, daily } = props.searchedWeather;
 
-  const timeConverter = (dt) => {
-    const dayTimeAccessed = new Date(dt * 1000);
+  const [tempType, setTemp] = useState('F');
 
-    const days = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
-
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'June',
-      'July',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    const year = dayTimeAccessed.getFullYear();
-    const month = months[dayTimeAccessed.getMonth()];
-    const date = dayTimeAccessed.getDate();
-    const day = days[dayTimeAccessed.getDay()];
-    const time = `${day}, ${month} ${date}, ${year}`;
-    return time;
+  const toggle = () => {
+    setTemp((prevState) => (prevState === 'F' ? 'C' : 'F'));
   };
 
   return (
     <div className="main">
-      {typeof main != 'undefined' ? (
+      {typeof current !== 'undefined' ? (
         <>
-          <div className="date-time">{timeConverter(dt)}</div>
-          <div className="location">
-            {weather.name}, {sys.country}
+          <div className="general-info">
+            <div className="date-time">{timeConverter(current.dt)}</div>
+            <div className="weather-type">
+              Today's forecast is: {current.weather[0].main}
+            </div>
+            <button className="toggle" onClick={toggle}>
+              change to °{tempType === 'F' ? 'C' : 'F'}
+            </button>
           </div>
-          <div className="weather-type">
-            Today's forecast is: {weather.weather[0].main}
-          </div>
-          <Temperature
-            main={main}
-            currentWeather={weather}
-            sys={sys}
-            wind={wind}
-          ></Temperature>
+          <Temperature current={current} tempType={tempType}></Temperature>
+          <DailyForecast daily={daily} tempType={tempType}></DailyForecast>
         </>
       ) : (
         <>

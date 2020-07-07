@@ -50,7 +50,6 @@ const WeatherIcon = (props) => {
       <img
         src={getWeatherIcon(conditions)}
         alt="current weather icon"
-        className="weather-icon"
         ref={(element) => {
           imgRef = element;
         }}
