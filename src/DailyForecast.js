@@ -22,8 +22,11 @@ const DailyForecast = (props) => {
 
   return (
     <>
-      <h3>7-Day Forecast</h3>
-      {showInfo === false ? <h5>Click for more</h5> : <h5>Hide the details</h5>}
+      {showInfo === false ? (
+        <h3>Show me the 7-day forecast</h3>
+      ) : (
+        <h3>Hide the 7-day forecast</h3>
+      )}
       <div>
         <FontAwesomeIcon
           className="icon"
