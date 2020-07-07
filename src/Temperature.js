@@ -4,14 +4,7 @@ import './styles/index.css';
 import { convertCel, convertFah } from './utilities';
 
 const Temperature = (props) => {
-  const {
-    // sunrise,
-    // sunset,
-    temp,
-    // feels_like,
-    // humidity,
-    // wind_speed,
-  } = props.current;
+  const { temp, feels_like } = props.current;
 
   return (
     <>
@@ -27,6 +20,13 @@ const Temperature = (props) => {
             {props.tempType === 'F' ? convertFah(temp) : convertCel(temp)}
             <span>°{props.tempType}</span>
           </div>
+          <h5>
+            Feels like{' '}
+            {props.tempType === 'F'
+              ? convertFah(feels_like)
+              : convertCel(feels_like)}
+            °
+          </h5>
         </div>
       </div>
     </>

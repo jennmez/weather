@@ -17,13 +17,15 @@ const Weather = (props) => {
     <div className="main">
       {typeof current !== 'undefined' ? (
         <>
-          <div className="date-time">{timeConverter(current.dt)}</div>
-          <div className="weather-type">
-            Today's forecast is: {current.weather[0].main}
+          <div className="general-info">
+            <div className="date-time">{timeConverter(current.dt)}</div>
+            <div className="weather-type">
+              Today's forecast is: {current.weather[0].main}
+            </div>
+            <button className="toggle" onClick={toggle}>
+              change to °{tempType === 'F' ? 'C' : 'F'}
+            </button>
           </div>
-          <button className="toggle" onClick={toggle}>
-            change to °{tempType === 'F' ? 'C' : 'F'}
-          </button>
           <Temperature current={current} tempType={tempType}></Temperature>
           <DailyForecast daily={daily} tempType={tempType}></DailyForecast>
         </>
